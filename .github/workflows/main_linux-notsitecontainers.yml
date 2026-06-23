@@ -25,15 +25,15 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: docker.io/
-          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A56574D0172F4A1D8DBEB7DE7105A26A }}
-          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_4378B203FA1B4027A6A345A885CA72DF }}
+          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_328C7D57128549A393434CCF514EA82E }}
+          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_D163A3D805014CFCBE88BCB4EC493467 }}
 
       - name: Build and push container image to registry
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A56574D0172F4A1D8DBEB7DE7105A26A }}/hello-world:${{ github.sha }}
+          tags: docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_328C7D57128549A393434CCF514EA82E }}/hello-world:${{ github.sha }}
           file: ./Dockerfile
 
   deploy:
@@ -49,9 +49,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_470C72E7340B41919DACEA248B7D7F18 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D57AAC8DD4EA41A984E0D13307EA1122 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_835DDD1A08544084AAC460100DA3B915 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_666E499D6D694E5A8129409C464F54E3 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F32E67E1FFDB442FAFCA041EA76D92D0 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5F318A62ABF84E5FB8418054EF08B567 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -59,5 +59,5 @@ jobs:
         with:
           app-name: 'linux-notsitecontainers'
           slot-name: 'Production'
-          images: 'docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A56574D0172F4A1D8DBEB7DE7105A26A }}/hello-world:${{ github.sha }}'
+          images: 'docker.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_328C7D57128549A393434CCF514EA82E }}/hello-world:${{ github.sha }}'
           
